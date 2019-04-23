@@ -17,6 +17,7 @@ services:
       - /home/devel/.vulcan
     stdin_open: true
     tty: true
+    network_mode: "host"
 ##########
   dvsbuild:
     image: build
@@ -34,6 +35,7 @@ services:
       - /tmp
     stdin_open: true
     tty: true
+    network_mode: "host"
 #
   dvstest:
     runtime: nvidia
@@ -49,5 +51,5 @@ services:
       - seccomp=unconfined
     stdin_open: true
     tty: true
-# volumes:
-# eof
+    network_mode: "host"
+# EOF
