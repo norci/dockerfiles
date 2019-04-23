@@ -1,4 +1,5 @@
 ##
+run(`sudo chown devel:users /home/devel/`)
 import Pkg
 ##
 try
@@ -15,10 +16,7 @@ catch err
 end
 Pkg.update()
 ##
-ENV["NODE_MIRROR"]="https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/"
-##
 Pkg.add("Conda")
-ENV["PATH"] *= ":/home/devel/.julia/conda/3/bin/"
 run(`pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple`)
 import Conda
 Conda.add_channel.([
@@ -65,8 +63,5 @@ run(`jupyter labextension install @jupyterlab/git @jupyterlab/github @jupyterlab
 run(`jupyter serverextension enable --py jupyterlab_git`)
 ## See: https://github.com/jupyterlab/jupyterlab-github#Installation
 run(`pip install -U jupyterlab_github`)
-##
-using IJulia
-installkernel("Julia Multi-Core", "--procs=auto")
 ##
 exit()

@@ -13,15 +13,25 @@ services:
       - "8888"
     environment:
       - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/devel/.julia/conda/3/bin/
+      - NODE_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/
     ports:
-      - "0.0.0.0:3022:22"
+      # - "0.0.0.0:3022:22"
       - "0.0.0.0:3088:8888"
     restart: always
-    stdin_open: true
-    tty: true
+    ##### enable it after jupyterlab has been installed.
+    command: "bash -c \"cd / ; /home/devel/.julia/conda/3/bin/jupyter lab --ip 0.0.0.0 --no-browser\""
+    ##### init command
+    # command: "julia -i --load /tmp/dockerfiles/init.jl"
     tmpfs:
       - /run
       - /tmp
     volumes:
       - julia:/home/devel/
-      - /p4:/p4
+      - /p4:/p4:ro
+      - .:/tmp/dockerfiles:ro
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.1.0/24"
