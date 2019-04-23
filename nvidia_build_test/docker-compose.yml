@@ -1,0 +1,53 @@
+version: '2.4' # ver 3 does not support runtime.
+services:
+##########
+  perforce:
+    image: perforce
+    build:
+      context: .
+      dockerfile: perforce.dockerfile
+    env_file:
+      - vulcan.env
+      - p4config.env
+    volumes:
+      - /p4:/p4
+    tmpfs:
+      - /run
+      - /tmp
+      - /home/devel/.vulcan
+    stdin_open: true
+    tty: true
+##########
+  dvsbuild:
+    image: build
+    build:
+      context: .
+      dockerfile: dvsbuild.dockerfile
+    environment:
+      - LIBRARY_PATH=/usr/lib/x86_64-linux-gnu
+    env_file:
+      - vulcan.env
+    volumes:
+      - /p4:/p4
+    tmpfs:
+      - /run
+      - /tmp
+    stdin_open: true
+    tty: true
+#
+  dvstest:
+    runtime: nvidia
+    image: nvidia/cuda:10.1-cudnn7-devel
+    volumes:
+      - /p4:/p4
+    tmpfs:
+      - /run
+      - /tmp
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp=unconfined
+    stdin_open: true
+    tty: true
+# volumes:
+# eof

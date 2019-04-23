@@ -1,0 +1,27 @@
+version: '2.4' # ver 3 does not support nvidia runtime.
+
+volumes:
+  julia:
+
+services:
+  julia-cuda:
+    image: eordian/julia-cuda
+    build: .
+    runtime: nvidia
+    expose:
+      - "22"
+      - "8888"
+    environment:
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/devel/.julia/conda/3/bin/
+    ports:
+      - "0.0.0.0:3022:22"
+      - "0.0.0.0:3088:8888"
+    restart: always
+    stdin_open: true
+    tty: true
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - julia:/home/devel/
+      - /p4:/p4
