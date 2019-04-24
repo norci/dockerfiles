@@ -39,7 +39,7 @@ services:
 #
   dvstest:
     runtime: nvidia
-    image: nvidia/cuda:10.1-cudnn7-devel
+    image: nvidia/cuda:10.1-base
     volumes:
       - /p4:/p4
     tmpfs:
