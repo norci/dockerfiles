@@ -5,14 +5,9 @@ FROM nvidia/cuda:10.1-cudnn7-devel
 RUN set -eux; \
 	apt-get -qq update \
 	&& apt-get -qq install --no-install-recommends \
-	ca-certificates \
-	curl \
-	git \
-	ssh \
-	sudo \
-	tmux byobu \
-	unzip \
-	zlib1g-dev ffmpeg\
+	ca-certificates curl git ssh sudo byobu unzip \
+	zlib1g-dev ffmpeg \
+	texlive-xetex texlive-fonts-recommended lmodern texlive-plain-generic\
 	&& apt-get -qq clean \
 	&& apt-get -qq autoremove \
 	&& rm -rf /var/lib/apt/lists/* \

@@ -15,7 +15,7 @@ services:
       - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/devel/.julia/conda/3/bin/
       - NODE_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/
     ports:
-      # - "0.0.0.0:3022:22"
+      - "0.0.0.0:3022:22"
       - "0.0.0.0:3088:8888"
     restart: always
     ##### enable it after jupyterlab has been installed.

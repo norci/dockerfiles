@@ -44,7 +44,7 @@ Pkg.add.([
     "MultivariateStats",
     "PackageCompiler",
     "Plots",
-    "Query",
+    "Queryverse",
     "RDatasets",
     "ScikitLearn",
     "StatsPlots"
