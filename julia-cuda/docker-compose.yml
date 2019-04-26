@@ -13,13 +13,20 @@ services:
     expose:
       - "22"
       - "8888"
+    # uncomment dns & network_mode, comment ports, if using VPN.
+    network_mode: "host"
+    dns:
+      - 10.19.185.252
+      - 10.19.185.253
+    dns_search:
+      - nvidia.com
+    # ports:
+    #   - "0.0.0.0:3022:22"
+    #   - "0.0.0.0:3888:8888"
     environment:
       - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/devel/.julia/conda/3/bin/
       - NODE_MIRROR=https://mirrors.huaweicloud.com/nodejs/
       # - NODE_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/
-    ports:
-      - "0.0.0.0:3022:22"
-      - "0.0.0.0:3888:8888"
     # restart: always
     stdin_open: true
     tty: true
