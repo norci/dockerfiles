@@ -6,11 +6,16 @@ services:
     build:
       context: .
       dockerfile: perforce.dockerfile
+    dns:
+      - 10.19.185.252
+      - 10.19.185.253
+    dns_search:
+      - nvidia.com
     env_file:
       - vulcan.env
       - p4config.env
     volumes:
-      - /p4:/p4
+      - perforce:/p4
     tmpfs:
       - /run
       - /tmp
@@ -20,7 +25,7 @@ services:
     network_mode: "host"
 ##########
   dvsbuild:
-    image: build
+    image: dvsbuild
     build:
       context: .
       dockerfile: dvsbuild.dockerfile
@@ -29,7 +34,7 @@ services:
     env_file:
       - vulcan.env
     volumes:
-      - /p4:/p4
+      - perforce:/p4
     tmpfs:
       - /run
       - /tmp
@@ -39,9 +44,12 @@ services:
 #
   dvstest:
     runtime: nvidia
-    image: nvidia/cuda:10.1-base
+    image: dvstest
+    build:
+      context: .
+      dockerfile: dvstest.dockerfile
     volumes:
-      - /p4:/p4
+      - perforce:/p4
     tmpfs:
       - /run
       - /tmp
@@ -52,4 +60,8 @@ services:
     stdin_open: true
     tty: true
     network_mode: "host"
+#
+volumes:
+  perforce:
+    external: true
 # EOF

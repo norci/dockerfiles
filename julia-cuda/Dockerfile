@@ -2,10 +2,11 @@ FROM nvidia/cuda:10.1-cudnn7-devel
 
 # ffmpeg for Plots.jl.
 
-RUN set -eux; \
-	apt-get -qq update \
-	&& apt-get -qq install --no-install-recommends \
-	ca-certificates curl git ssh sudo byobu unzip \
+RUN set -eux\
+	&& sed -i 's/archive.ubuntu.com/mirrors.huaweicloud.com/' /etc/apt/sources.list \
+	&& sed -i 's/security.ubuntu.com/mirrors.huaweicloud.com/' /etc/apt/sources.list \
+	&& apt-get -qq update \
+	&& apt-get -qq install --no-install-recommends ca-certificates curl git ssh sudo byobu unzip \
 	zlib1g-dev ffmpeg \
 	texlive-xetex texlive-fonts-recommended lmodern texlive-plain-generic\
 	&& apt-get -qq clean \

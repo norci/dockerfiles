@@ -1,5 +1,5 @@
 #!/bin/bash -eux
-docker-compose up -d
+# docker-compose up -d
 docker-compose exec perforce p4 login
 ##### p4's maximum thread number is 10.
 docker-compose exec perforce p4 sync -q --parallel threads=8,batch=64 //sw/eris/... //sw/gpgpu/eris/cuda.vlcp

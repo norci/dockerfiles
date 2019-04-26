@@ -17,13 +17,14 @@ end
 Pkg.update()
 ##
 Pkg.add("Conda")
-run(`pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple`)
 import Conda
 Conda.add_channel.([
     "https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/",
     "https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/",
     "https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/"
     ])
+Conda.add("pip")
+run(`pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple`)
 ##
 Pkg.add.([
     "BenchmarkTools",
@@ -32,15 +33,17 @@ Pkg.add.([
     "CSV",
     "CuArrays",
     "DataFrames",
-    "DataVoyager",
-    "Electron",
+    # "DataVoyager",
+    # "Electron",
+    "DecisionTree",
     "Flux",
     "GLM",
     "GR",
     "Gadfly",
+    "HDF5",
     "IJulia",
     "JuliaDB",
-    "Latexify",
+    # "Latexify",
     "MultivariateStats",
     "PackageCompiler",
     "Plots",
