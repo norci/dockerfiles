@@ -4,7 +4,7 @@ RUN set -x\
  && sed -i 's/archive.ubuntu.com/mirrors.huaweicloud.com/' /etc/apt/sources.list\
  && sed -i 's/security.ubuntu.com/mirrors.huaweicloud.com/' /etc/apt/sources.list\
  && apt-get -qq update\
- && apt-get -qq install --no-install-recommends ca-certificates gnupg wget sudo perl python python-dev python-crypto python-pip python-paramiko python-psutil python-setuptools\
+ && apt-get -qq install --no-install-recommends ca-certificates gnupg netbase wget sudo perl python python-dev python-crypto python-pip python-paramiko python-psutil python-setuptools\
  && python -m pip install -U pip\
  && python -m pip config set global.index-url https://mirrors.huaweicloud.com/repository/pypi/simple\
  && (for PKG in p4python==2017.2.1615960 ; do python -m pip install -U $PKG ; done)\
@@ -22,3 +22,4 @@ RUN set -x\
 #
 USER devel
 WORKDIR /home/devel
+# netbase is required by dvsbuild.pl.
