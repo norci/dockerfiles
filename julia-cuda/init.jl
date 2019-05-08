@@ -16,6 +16,7 @@ catch err
 end
 Pkg.update()
 ##
+ENV["PATH"] *= ":/home/devel/.julia/conda/3/bin/"
 Pkg.add("Conda")
 import Conda
 Conda.add_channel.([

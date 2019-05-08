@@ -18,10 +18,7 @@ services:
     #   - nvidia.com
     environment:
       - NODE_MIRROR=https://mirrors.huaweicloud.com/nodejs/
-    ##### enable it after jupyterlab has been installed.
     command: "bash -c \"cd / ; /home/devel/.julia/conda/3/bin/jupyter lab --ip 0.0.0.0 --no-browser\""
-    ##### init
-    # command: "julia --load /tmp/julia-cuda/init.jl"
     tmpfs:
       - /run
       - /tmp
