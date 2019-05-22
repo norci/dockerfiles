@@ -16,56 +16,54 @@ catch err
 end
 Pkg.update()
 ##
-ENV["PATH"] *= ":/home/devel/.julia/conda/3/bin/"
-Pkg.add("Conda")
-import Conda
-Conda.add_channel.([
-    "https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/",
-    "https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/",
-    "https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/"
-    ])
-Conda.add("pip")
-run(`pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple`)
-##
 Pkg.add.([
     "BenchmarkTools",
-    "CUDAnative",
-    "Compose",
     "CSV",
-    "CuArrays",
+    "Conda",
     "DataFrames",
     "DataFramesMeta",
     "DecisionTree",
     "Flux",
     "GLM",
-    "GR",
-    "Gadfly",
-    "HDF5",
     "IJulia",
     "JuliaDB",
     "JuliaDBMeta",
     "MultivariateStats",
     "PackageCompiler",
-    "Plots",
-    "PyCall",
-    "Queryverse",
     "RDatasets",
     "ScikitLearn",
     "StatsPlots"
     ])
-## python
+## cuda
+try
+    run(`nvidia-smi`)
+    Pkg.add.([
+        "CUDAnative",
+        "CuArrays"
+    ])
+catch err
+    if !isa(err,Base.IOError)
+        throw(err)
+    end
+end
+##
+import Conda
+Conda.add_channel("conda-forge")
 Conda.add([
     "jupyter",
     "jupyterlab",
     "nodejs",
     "nbdime",
-    "jupyterlab-git"
+    "jupyterlab-git",
+    "pip"
     ])
-## nodejs
+##
+ENV["NODE_MIRROR"]="https://mirrors.huaweicloud.com/nodejs/"
+ENV["PATH"] *= ":" * ENV["HOME"] * "/.julia/conda/3/bin/"
+##
+run(`pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple`)
 run(`nbdime extensions --enable`)
-run(`jupyter labextension install @jupyterlab/git @jupyterlab/github @jupyterlab/toc`)
+run(`jupyter labextension install @jupyterlab/celltags @jupyterlab/git @jupyterlab/toc`) ## See: https://github.com/jupyterlab/jupyterlab-github#Installation
 run(`jupyter serverextension enable --py jupyterlab_git`)
-## See: https://github.com/jupyterlab/jupyterlab-github#Installation
-run(`pip install -U jupyterlab_github`)
 ##
 exit()
