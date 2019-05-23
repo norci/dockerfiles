@@ -9,7 +9,7 @@ services:
   julia:
     image: eordian/julia-cuda
     build: .
-    runtime: nvidia
+    # runtime: nvidia
     # uncomment dns, if using VPN.
     # dns:
     #   - 10.19.185.252
@@ -26,6 +26,6 @@ services:
       - julia:/home/devel/
       - perforce:/p4:ro
       - .:/tmp/julia-cuda/:ro
-    network_mode: bridge
+    network_mode: host
     expose:
       - 8888
