@@ -1,16 +1,13 @@
 version: '2.4' # ver 3 does not support runtime.
 services:
 ##########
-  perforce:
-    image: perforce
+  dvsbuild:
+    image: dvsbuild
     build:
       context: .
-      dockerfile: perforce.dockerfile
-    dns:
-      - 10.19.185.252
-      - 10.19.185.253
-    dns_search:
-      - nvidia.com
+      dockerfile: dockerfile.dvsbuild
+    environment:
+      - LIBRARY_PATH=/usr/lib/x86_64-linux-gnu
     env_file:
       - vulcan.env
       - p4config.env
@@ -20,34 +17,18 @@ services:
       - /run
       - /tmp
       - /home/devel/.vulcan
-    stdin_open: true
-    tty: true
-    network_mode: "host"
+    command: "python3 -m jupyterlab --no-browser --ip 0.0.0.0"
+    expose:
+      - "8888"
+    ports:
+      - "8888"
 ##########
-  dvsbuild:
-    image: dvsbuild
-    build:
-      context: .
-      dockerfile: dvsbuild.dockerfile
-    environment:
-      - LIBRARY_PATH=/usr/lib/x86_64-linux-gnu
-    env_file:
-      - vulcan.env
-    volumes:
-      - perforce:/p4
-    tmpfs:
-      - /run
-      - /tmp
-    stdin_open: true
-    tty: true
-    network_mode: "host"
-#
   dvstest:
     runtime: nvidia
     image: dvstest
     build:
       context: .
-      dockerfile: dvstest.dockerfile
+      dockerfile: dockerfile.dvstest
     volumes:
       - perforce:/p4
     tmpfs:
@@ -59,7 +40,6 @@ services:
       - seccomp=unconfined
     stdin_open: true
     tty: true
-    network_mode: "host"
 #
 volumes:
   perforce:
