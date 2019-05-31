@@ -1,6 +1,7 @@
 FROM nvidia/cuda:10.1-cudnn7-devel
 
 # ffmpeg for Plots.jl.
+# libpixman-1-dev for Cairo
 
 RUN set -eux\
 	&& sed -i 's/archive.ubuntu.com/mirrors.huaweicloud.com/' /etc/apt/sources.list\
@@ -9,7 +10,8 @@ RUN set -eux\
   && apt-get -qq install --no-install-recommends \
   ca-certificates curl git ssh sudo byobu unzip\
 	zlib1g-dev ffmpeg pkg-config hdf5-tools libffi-dev libpng-dev\
-	texlive-xetex texlive-fonts-recommended lmodern texlive-plain-generic\
+  texlive-xetex texlive-fonts-recommended lmodern texlive-plain-generic\
+  libpoppler-dev libpixman-1-dev\
 	&& apt-get -qq clean\
 	&& apt-get -qq autoremove\
 	&& rm -rf /var/lib/apt/lists/*\

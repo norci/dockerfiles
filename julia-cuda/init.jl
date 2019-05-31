@@ -33,7 +33,10 @@ Pkg.add.([
     "PackageCompiler",
     "RDatasets",
     "ScikitLearn",
-    "StatsPlots"
+    "StatsPlots",
+    "Gadfly",
+    "Cairo",
+    "Fontconfig"
     ])
 ## cuda
 try
