@@ -12,6 +12,7 @@ RUN set -eux\
 	zlib1g-dev ffmpeg pkg-config hdf5-tools libffi-dev libpng-dev\
   texlive-xetex texlive-fonts-recommended lmodern texlive-plain-generic\
   libpoppler-dev libpixman-1-dev\
+  inkscape\
 	&& apt-get -qq clean\
 	&& apt-get -qq autoremove\
 	&& rm -rf /var/lib/apt/lists/*\
