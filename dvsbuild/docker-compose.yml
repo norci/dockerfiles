@@ -1,0 +1,30 @@
+version: '2.4' # ver 3 does not support runtime.
+services:
+##########
+  dvsbuild:
+    image: dvsbuild
+    build:
+      context: .
+    runtime: nvidia
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp=unconfined
+    env_file:
+      - env.txt
+    volumes:
+      - perforce:/p4
+    tmpfs:
+      - /run
+      - /tmp
+      - /home/devel/.vulcan
+    command: "python3 -m jupyterlab --no-browser --ip 0.0.0.0"
+    expose:
+      - "8888"
+    ports:
+      - "0.0.0.0:10000:8888/tcp"
+#
+volumes:
+  perforce:
+    external: true
+# EOF

@@ -27,3 +27,5 @@ RUN cat /tmp/julia-1.1.1-linux-x86_64.tar.gz | tar zxf - -C /usr/local/ --strip-
 
 USER devel
 WORKDIR /home/devel
+
+ENV NODE_MIRROR https://mirrors.huaweicloud.com/nodejs/

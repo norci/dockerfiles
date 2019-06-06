@@ -16,8 +16,6 @@ services:
     #   - 10.19.185.253
     # dns_search:
     #   - nvidia.com
-    environment:
-      - NODE_MIRROR=https://mirrors.huaweicloud.com/nodejs/
     command: "bash -c \"cd / ; /home/devel/.julia/conda/3/bin/jupyter lab --ip 0.0.0.0 --no-browser\""
     tmpfs:
       - /run
