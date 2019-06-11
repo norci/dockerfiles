@@ -10,6 +10,7 @@ RUN set -x\
 	nodejs npm\
 	python-pip\
 	python3-pip\
+	pandoc texlive-xetex texlive-fonts-recommended lmodern texlive-plain-generic\
 	sudo\
 	&& apt-get -qq clean\
 	&& apt-get -qq autoremove\
