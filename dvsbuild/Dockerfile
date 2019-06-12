@@ -12,8 +12,6 @@ RUN set -x\
 	helix-cli\
 	libc6-i386 netbase\
 	perl\
-	python-dev python\
-	sudo tzdata\
 	&& apt-get -qq clean\
 	&& apt-get -qq autoremove\
 	&& rm -rf /var/lib/apt/lists/*\
