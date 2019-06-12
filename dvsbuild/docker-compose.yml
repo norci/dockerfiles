@@ -2,7 +2,7 @@ version: '2.4' # ver 3 does not support runtime.
 services:
 ##########
   dvsbuild:
-    image: dvsbuild
+    image: eordian/dvsbuild
     build:
       context: .
     runtime: nvidia
@@ -12,19 +12,19 @@ services:
       - seccomp=unconfined
     env_file:
       - env.txt
+    working_dir: /
     volumes:
+      - work:/home/jovyan/work
       - perforce:/p4
     tmpfs:
       - /run
       - /tmp
-      - /home/devel/.vulcan
-    command: "python3 -m jupyterlab --no-browser --ip 0.0.0.0"
-    expose:
-      - "8888"
+      - /home/jovyan/.vulcan
     ports:
-      - "0.0.0.0:10000:8888/tcp"
+      - "8888"
 #
 volumes:
+  work:
   perforce:
     external: true
-# EOF
+#

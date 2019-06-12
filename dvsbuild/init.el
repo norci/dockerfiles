@@ -8,7 +8,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(async-shell-command-buffer (quote new-buffer))
- '(custom-enabled-themes (quote (tango-dark)))
+ '(custom-enabled-themes (quote (tango)))
  '(dired-auto-revert-buffer (quote dired-directory-changed-p))
  '(dired-recursive-copies (quote always))
  '(dired-recursive-deletes (quote always))
@@ -22,12 +22,6 @@
  '(shell-command-dont-erase-buffer (quote end-last-out))
  '(show-paren-mode t)
  )
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "DejaVu Sans Mono" :foundry "PfEd" :slant normal :weight bold :height 121 :width normal)))))
 
 ;;
 (put 'upcase-region 'disabled nil)

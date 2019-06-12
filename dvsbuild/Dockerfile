@@ -1,31 +1,42 @@
-FROM jupyter
+FROM jupyter/minimal-notebook
 USER root
+
 ENV DEBIAN_FRONTEND noninteractive
-COPY perforce.pubkey /root/perforce.pubkey
-RUN set -x\
-	&& apt-key add /root/perforce.pubkey\
-	&& echo "deb http://package.perforce.com/apt/ubuntu bionic release" > /etc/apt/sources.list.d/perforce.list\
-	&& apt-get -qq update\
-	&& apt-get -qq install --no-install-recommends\
-	emacs-nox\
-	g++ gcc gdb make\
-	helix-cli\
-	libc6-i386 netbase\
-	perl\
-	&& apt-get -qq clean\
-	&& apt-get -qq autoremove\
-	&& rm -rf /var/lib/apt/lists/*\
-	&& rm -rf /root/.cache/ /root/perforce.pubkey
+ENV PIP_USE_MIRRORS true
 
-# netbase is required by dvsbuild.pl.
-ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
-#
-WORKDIR /
-USER devel
+COPY perforce.pubkey /tmp/perforce.pubkey
 
-RUN for P in setuptools ipykernel p4python==2017.2.1615960 pycrypto paramiko psutil; do python -m pip install --no-cache-dir --user -qq $P; done \
-	&& python -m ipykernel install --user
+RUN set -eux;\
+	sed -i 's/archive.ubuntu.com/mirrors.huaweicloud.com/' /etc/apt/sources.list;\
+	sed -i 's/security.ubuntu.com/mirrors.huaweicloud.com/' /etc/apt/sources.list;\
+	apt-get -qq update;\
+	apt-get -qq install --no-install-recommends gnupg;\
+	apt-key add /tmp/perforce.pubkey;\
+	echo "deb http://package.perforce.com/apt/ubuntu bionic release" > /etc/apt/sources.list.d/perforce.list;\
+	apt-get -qq update;\
+	apt-get -qq install --no-install-recommends helix-cli emacs-nox g++ gcc gdb make libc6-i386 netbase gnupg perl python-pip;\
+	apt-get -qq clean;\
+	apt-get -qq autoremove;\
+	rm -rf /var/lib/apt/lists/*;\
+	rm -rf /root/.cache/ /tmp/perforce.pubkey;\
+	usermod -aG sudo jovyan;\
+	echo 'jovyan ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/jovyan
 
-COPY --chown=devel:users init_p4.sh /home/devel/
-COPY --chown=devel:users init.el /home/devel/.emacs.d/init.el
+USER jovyan
+
+## for vulcan
+RUN set -eux;\
+	for P in \
+	pip setuptools ipykernel p4python==2017.2.1615960 pycrypto paramiko psutil;\
+	do python2 -m pip install -U --no-cache-dir --user -q $P;\
+	done; \
+	python2 -m ipykernel install --user
+
+# p4python has a bug.
+# RUN set -eux;\
+#	for P in pip setuptools wheel p4python;\
+#	do python3 -m pip install --no-warn-script-location -U --no-cache-dir --user -q $P;\
+#	done
+
+COPY --chown=jovyan:users init_p4.sh /home/jovyan/
+COPY --chown=jovyan:users init.el /home/jovyan/.emacs.d/init.el
