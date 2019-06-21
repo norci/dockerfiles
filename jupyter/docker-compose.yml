@@ -2,7 +2,8 @@ version: "3"
 
 services:
   jupyter:
-    image: jupyter/datascience-notebook
+    image: eordian/datascience-notebook
+    build: .
     environment:
       - NODE_MIRROR=https://mirrors.huaweicloud.com/nodejs/
       - PIP_USE_MIRRORS=true
