@@ -14,8 +14,8 @@ services:
       - env.txt
     working_dir: /
     volumes:
-      - work:/home/jovyan/work
       - perforce:/p4
+      - /scratch:/scratch
     tmpfs:
       - /run
       - /tmp
@@ -24,7 +24,6 @@ services:
       - "8888"
 #
 volumes:
-  work:
   perforce:
     external: true
 #
