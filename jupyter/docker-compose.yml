@@ -3,19 +3,19 @@ version: "3"
 services:
   jupyter:
     image: jupyter/datascience-notebook
-    tmpfs:
-      - /run
-      - /tmp
     environment:
       - NODE_MIRROR=https://mirrors.huaweicloud.com/nodejs/
       - PIP_USE_MIRRORS=true
       - JUPYTER_ENABLE_LAB=yes
-    volumes:
-      - work:/home/jovyan/work
-      - perforce:/p4
     ports:
       - "8888"
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /scratch:/scratch
+      - perforce:/p4
+    working_dir: /
 volumes:
-  work:
   perforce:
     external: true
