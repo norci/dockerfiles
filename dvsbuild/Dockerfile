@@ -1,4 +1,5 @@
-FROM jupyter/minimal-notebook
+# FROM jupyter/minimal-notebook
+FROM eordian/datascience-notebook
 USER root
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -26,6 +27,7 @@ USER jovyan
 
 ## for vulcan
 RUN set -eux;\
+	python2 -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple;\
 	for P in \
 	pip setuptools ipykernel p4python==2017.2.1615960 pycrypto paramiko psutil;\
 	do python2 -m pip install -U --no-cache-dir --user -q $P;\
