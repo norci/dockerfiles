@@ -1,23 +1,12 @@
 FROM jupyter/datascience-notebook
+
+ENV JUPYTER_ENABLE_LAB=yes
 ENV NODE_MIRROR=https://mirrors.huaweicloud.com/nodejs/
 ENV PIP_DEFAULT_TIMEOUT=60
 ENV PIP_USE_MIRRORS=true
-RUN set -eux;\
-	# pip config set global.index-url https://mirrors.huaweicloud.com/repository/pypi/simple;\
-	# pip config set global.trusted-host mirrors.huaweicloud.com;\
-	conda install\
-	nbdime\
-	jupyterlab-git\
-	jupyter_conda;\
-#
-	nbdime extensions --enable;\
-#
-	jupyter labextension install -y\
-	@jupyterlab/celltags\
-	@jupyterlab/git\
-	@jupyterlab/toc\
-	@qzchenwl/jupyterlab_voyager\
-	jupyterlab_toastify\
-	jupyterlab_conda;\
-#
-	jupyter serverextension enable --py jupyterlab_git;
+
+RUN set -eux &&\
+	for I in nbdime jupyterlab-git; do conda install -y $I; done &&\
+	nbdime extensions --enable &&\
+	for I in @jupyterlab/celltags @jupyterlab/git @jupyterlab/toc jupyterlab_toastify; do jupyter labextension install -y $I; done &&\
+	jupyter serverextension enable --py jupyterlab_git

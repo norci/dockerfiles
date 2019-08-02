@@ -14,7 +14,7 @@ services:
       - env.txt
     working_dir: /
     volumes:
-      - perforce:/p4
+      - /p4:/p4
       - /scratch:/scratch
     tmpfs:
       - /run
@@ -23,7 +23,7 @@ services:
     ports:
       - "8888"
 #
-volumes:
-  perforce:
-    external: true
+# volumes:
+#   perforce:
+#     external: true
 #
