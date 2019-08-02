@@ -36,3 +36,4 @@ RUN set -eux;\
 #	do python3 -m pip install --no-warn-script-location -U --no-cache-dir --user -q $P;\
 #	done
 
+COPY --chown=100:100 init.el /home/jovyan/.emacs.d/
