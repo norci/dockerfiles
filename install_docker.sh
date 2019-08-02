@@ -1,6 +1,8 @@
 #!/bin/bash -eux
+
+# From https://docs.docker.com/install/linux/docker-ce/ubuntu/
 curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
-bash -eux /tmp/get-docker.sh
+bash -e /tmp/get-docker.sh
 sudo usermod -aG docker $USER
 
 #### From https://github.com/NVIDIA/nvidia-docker
