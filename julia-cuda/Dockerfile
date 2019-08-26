@@ -1,4 +1,5 @@
 FROM nvidia/cuda:10.1-cudnn7-devel
+ENV NODE_MIRROR https://mirrors.huaweicloud.com/nodejs/
 
 # ffmpeg for Plots.jl.
 # libpixman-1-dev for Cairo
@@ -28,4 +29,3 @@ RUN cat /tmp/julia-1.1.1-linux-x86_64.tar.gz | tar zxf - -C /usr/local/ --strip-
 USER devel
 WORKDIR /home/devel
 
-ENV NODE_MIRROR https://mirrors.huaweicloud.com/nodejs/

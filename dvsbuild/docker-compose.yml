@@ -5,7 +5,7 @@ services:
     image: eordian/dvsbuild
     build:
       context: .
-    runtime: nvidia
+    # runtime: nvidia
     cap_add:
       - SYS_PTRACE
     security_opt:
@@ -19,7 +19,6 @@ services:
     tmpfs:
       - /run
       - /tmp
-      - /home/jovyan/.vulcan
     ports:
       - "8888"
 #

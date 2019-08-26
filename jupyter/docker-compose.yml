@@ -4,10 +4,6 @@ services:
   jupyter:
     image: eordian/datascience-notebook
     build: .
-    environment:
-      - NODE_MIRROR=https://mirrors.huaweicloud.com/nodejs/
-      - PIP_USE_MIRRORS=true
-      - JUPYTER_ENABLE_LAB=yes
     ports:
       - "8888"
     tmpfs:
@@ -15,8 +11,4 @@ services:
       - /tmp
     volumes:
       - /scratch:/scratch
-      - perforce:/p4
     working_dir: /
-volumes:
-  perforce:
-    external: true

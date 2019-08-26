@@ -12,7 +12,7 @@ RUN set -eux;\
 	apt-key add /tmp/perforce.pubkey;\
 	echo "deb http://package.perforce.com/apt/ubuntu bionic release" > /etc/apt/sources.list.d/perforce.list;\
 	apt-get -qq update;\
-	apt-get -qq install --no-install-recommends helix-cli g++ gcc gdb make libc6-i386 netbase gnupg perl python-pip;\
+	apt-get -qq install --no-install-recommends helix-cli g++ gcc gdb make libc6-i386 netbase gnupg perl python-pip openssh-client rsync netcat-openbsd;\
 	apt-get -qq clean;\
 	apt-get -qq autoremove;\
 	rm -rf /var/lib/apt/lists/*;\
@@ -22,18 +22,10 @@ RUN set -eux;\
 
 USER jovyan
 
-## for vulcan
 RUN set -eux;\
 	for P in \
-	pip setuptools ipykernel p4python==2017.2.1615960 pycrypto paramiko psutil pandas;\
-	do python2 -m pip install -U --no-cache-dir --user -q $P;\
-	done; \
-	python2 -m ipykernel install --user
-
-# p4python has a bug.
-# RUN set -eux;\
-#	for P in pip setuptools wheel p4python;\
-#	do python3 -m pip install --no-warn-script-location -U --no-cache-dir --user -q $P;\
-#	done
+	pip setuptools wheel p4python;\
+	do python -m pip install -U --no-cache-dir --user -q $P;\
+	done
 
 COPY --chown=100:100 init.el /home/jovyan/.emacs.d/
