@@ -1,5 +1,5 @@
 #!/bin/bash -eux
 docker-compose up -d
-docker-compose exec jupyter jupyter notebook password
-docker-compose restart
+docker-compose exec $1 jupyter notebook password
+docker-compose restart $1
 docker-compose ps
