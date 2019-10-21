@@ -40,10 +40,12 @@ RUN set -eux;\
 	conda install\
 	ipywidgets\
 	jupyterlab-git\
+	lxml\
 	nbdime\
 	numexpr\
 	plotly\
 	psycopg2\
+	shapely\
 	;\
 	nbdime extensions --enable;\
 	jupyter serverextension enable --py jupyterlab_git;\
@@ -51,6 +53,7 @@ RUN set -eux;\
 	jupyter labextension install\
 	@jupyter-widgets/jupyterlab-manager\
 	@jupyterlab/git\
+	@jupyterlab/toc\
 	jupyterlab-plotly\
 	plotlywidget\
 	--no-build;\

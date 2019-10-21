@@ -46,7 +46,7 @@ services:
     environment:
       POSTGRES_PASSWORD: example
     volumes:
-      - /p4/postgres:/var/lib/postgresql/data
+      - /postgres:/var/lib/postgresql/data
       - /p4:/p4
       - /scratch:/scratch
     tmpfs:
@@ -56,7 +56,9 @@ services:
     #   - 5432:5432
 
   adminer:
-    image: adminer
+    image: adminer:master
+    build:
+      context: adminer
     restart: always
     ports:
       - 8080:8080
