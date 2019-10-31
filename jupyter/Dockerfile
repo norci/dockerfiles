@@ -38,6 +38,7 @@ RUN set -eux;\
 USER jovyan
 RUN set -eux;\
 	conda install\
+	ipython-sql\
 	ipywidgets\
 	jupyterlab-git\
 	lxml\
