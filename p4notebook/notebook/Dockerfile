@@ -51,3 +51,5 @@ RUN set -eux;\
 	;\
 	NODE_OPTIONS=--max-old-space-size=4096\
 	jupyter lab build;
+
+RUN echo 'from notebook.auth import passwd \nc.NotebookApp.password = passwd("example")' >> .jupyter/jupyter_notebook_config.py
