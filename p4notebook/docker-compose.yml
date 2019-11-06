@@ -1,0 +1,20 @@
+version: "2.4"
+
+services:
+  notebook:
+    image: eordian/notebook
+    build:
+      context: notebook
+    env_file:
+      - env.txt
+    ports:
+      - 8888:8888
+    runtime: nvidia
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /p4:/p4
+      - /scratch:/scratch
+      - /p4/julia-packages/:/opt/julia/
+    working_dir: /
