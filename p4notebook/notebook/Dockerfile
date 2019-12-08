@@ -1,5 +1,7 @@
-FROM jupyter/datascience-notebook
+FROM jupyter/minimal-notebook
+
 USER root
+
 RUN set -eux;\
 	sed -i 's/archive.ubuntu.com/mirrors.huaweicloud.com/'  /etc/apt/sources.list;\
 	sed -i 's/security.ubuntu.com/mirrors.huaweicloud.com/' /etc/apt/sources.list;\
@@ -28,9 +30,9 @@ RUN set -eux;\
 	apt-get -qq autoremove;\
 	rm -rf /var/lib/apt/lists/* /root/.cache
 
-COPY --chown=1000:100 init.el /home/jovyan/.emacs.d/
+COPY --chown=$NB_UID:$NB_GID init.el /home/$NB_USER/.emacs.d/
 
-USER jovyan
+USER $NB_UID
 
 ENV NODE_MIRROR=https://mirrors.huaweicloud.com/nodejs/
 RUN set -eux;\
@@ -38,8 +40,10 @@ RUN set -eux;\
 	ipywidgets\
 	jupyterlab-git\
 	nbdime\
+	pandas\
 	plotly\
 	;\
+	pip install --user p4python;\
 	nbdime extensions --enable;\
 	jupyter serverextension enable --py jupyterlab_git;\
 	jupyter labextension install --no-build\
