@@ -30,8 +30,6 @@ RUN set -eux;\
 	apt-get -qq autoremove;\
 	rm -rf /var/lib/apt/lists/* /root/.cache
 
-COPY --chown=$NB_UID:$NB_GID init.el /home/$NB_USER/.emacs.d/
-
 USER $NB_UID
 
 ENV NODE_MIRROR=https://mirrors.huaweicloud.com/nodejs/
@@ -56,4 +54,5 @@ RUN set -eux;\
 	NODE_OPTIONS=--max-old-space-size=4096\
 	jupyter lab build;
 
-RUN echo 'from notebook.auth import passwd \nc.NotebookApp.password = passwd("example")' >> .jupyter/jupyter_notebook_config.py
+COPY --chown=1000:100 init.el /home/jovyan/.emacs.d/
+COPY --chown=1000:100 jupyter_notebook_config.py .jupyter/
