@@ -37,6 +37,7 @@ RUN set -eux;\
 	conda install -y -c conda-forge \
 	ipywidgets\
 	jupyterlab-git\
+	lxml\
 	nbdime\
 	pandas\
 	plotly\
@@ -53,6 +54,3 @@ RUN set -eux;\
 	;\
 	NODE_OPTIONS=--max-old-space-size=4096\
 	jupyter lab build;
-
-COPY --chown=1000:100 init.el /home/jovyan/.emacs.d/
-COPY --chown=1000:100 jupyter_notebook_config.py .jupyter/

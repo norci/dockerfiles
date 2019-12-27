@@ -4,7 +4,7 @@ services:
   notebook:
     image: eordian/notebook
     build:
-      context: notebook
+      context: .
     env_file:
       - env.txt
     ports:
@@ -14,6 +14,8 @@ services:
       - /run
       - /tmp
     volumes:
+      - ~/.emacs.d/:/home/jovyan/.emacs.d/:ro
+      - ../jupyter_notebook_config.py:/home/jovyan/.jupyter/jupyter_notebook_config.py:ro
       - /p4:/p4
       - /scratch:/scratch
       - /p4/julia-packages/:/opt/julia/
