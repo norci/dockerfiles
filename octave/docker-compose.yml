@@ -1,11 +1,11 @@
 version: "3"
-
 services:
   notebook:
     image: eordian/octave
     build: .
     environment:
       JUPYTER_ENABLE_LAB: "yes"
+    network_mode: "host"
     ports:
       - 8888:8888
     volumes:
