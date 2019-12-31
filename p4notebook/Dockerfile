@@ -14,6 +14,7 @@ RUN set -eux;\
 	gdb\
 	gnupg\
 	libc6-i386\
+	libwww-perl\
 	make\
 	netbase\
 	netcat-openbsd\
