@@ -1,0 +1,24 @@
+version: '2.4' # ver 3 does not support nvidia runtime.
+
+volumes:
+  julia-pkg:
+
+services:
+  julia:
+    image: eordian/julia-jupyter
+    build: .
+    command: jupyter lab
+    env_file:
+      - env.txt
+    stdin_open: true
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - julia-pkg:/root/.julia
+      - ../jupyter_notebook_config.py:/root/.jupyter/jupyter_notebook_config.py:ro
+      - ./init.jl:/root/init.jl:ro
+    expose:
+      - 8888
+    ports:
+      - 8888:8888
