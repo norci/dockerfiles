@@ -4,7 +4,7 @@ services:
   julia:
     image: eordian/julia
     build: .
-    command: emacs --daemon
+    command: bash
     env_file:
       - env.txt
     stdin_open: true

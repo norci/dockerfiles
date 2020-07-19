@@ -8,7 +8,7 @@ echo 'deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal main restricte
 ### silex/emacs is based on ubuntu 18.04, the cmake version is too low.
 
 RUN apt-get update -qq &&\
-    apt-get install -qqy cmake git libtool libvterm-bin libvterm-dev &&\
+    apt-get install -qqy cmake git libtool libvterm-bin libvterm-dev peco &&\
     apt-get -qq clean && apt-get -qq autoremove && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /root
