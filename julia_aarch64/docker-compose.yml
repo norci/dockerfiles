@@ -4,6 +4,7 @@ services:
   julia:
     image: eordian/julia
     build: .
+    command: emacs --daemon
     env_file:
       - env.txt
     stdin_open: true
@@ -11,5 +12,9 @@ services:
       - /run
       - /tmp
     volumes:
-      - ./init.jl:/root/init.jl:ro
-      - ~/code:/root/code
+      - ./init.jl:/root/init.jl
+      # - ./startup.jl:/root/.julia/config/startup.jl
+      # - ./pip.conf:/etc/pip.conf
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /home/pi/code:/root/code
+    working_dir: /root
