@@ -1,8 +1,8 @@
 FROM julia
-
-# CUDA.jl recommends cuDNN. but download the binary package from github is too slow, so use docker image instead.
 FROM nvidia/cuda:11.0-cudnn8-devel-ubuntu18.04
+FROM silex/emacs
 
+COPY --from=nvidia/cuda /usr/local /usr/local
 COPY --from=julia /usr/local/julia /usr/local/julia
 
 RUN set -eux\

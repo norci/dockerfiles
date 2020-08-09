@@ -15,4 +15,4 @@ WORKDIR /root
 RUN rm -rf .emacs.d && git clone --depth=1 https://gitee.com/beann/emacs.d .emacs.d
 
 COPY ./startup.jl /root/.julia/config/startup.jl
-COPy ./pip.conf /etc/pip.conf
+COPY ./pip.conf /etc/pip.conf

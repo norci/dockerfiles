@@ -1,4 +1,4 @@
-version: '2.4' # ver 3 does not support nvidia runtime.
+version: "3" # ver 3 does not support nvidia runtime.
 
 volumes:
   julia:
@@ -7,12 +7,14 @@ services:
   julia:
     image: eordian/julia
     build: .
-    runtime: nvidia
+    env_file:
+      - env.txt
     stdin_open: true
     tmpfs:
       - /run
       - /tmp
     volumes:
-      - julia:/home/devel/
-    expose:
-      - 8888
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - julia:/root/.julia
+      - ./init.jl:/root/init.jl
+      - ./startup.jl:/root/.julia/config/startup.jl

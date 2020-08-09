@@ -5,10 +5,6 @@
 # ENV["JULIA_PKG_SERVER"] = "https://mirrors.bfsu.edu.cn/julia/static" # too old
 ENV["JULIA_NUM_THREADS"] = Base.Sys.CPU_THREADS
 
-if ENV["OS"] != "Windows_NT"
-    ENV["JULIA_EDITOR"] = "emacsclient"
-end
-
 try
     using Revise
 catch e
@@ -16,10 +12,10 @@ catch e
 end
 
 try
-    if ENV["OS"] != "Windows_NT"
-        using InteractiveCodeSearch
-        InteractiveCodeSearch.CONFIG.interactive_matcher = `percol`
-    end
+    # if ENV["OS"] != "Windows_NT"
+    using InteractiveCodeSearch
+    InteractiveCodeSearch.CONFIG.interactive_matcher = `peco`
+    # end
 catch e
     @warn(e.msg)
 end
