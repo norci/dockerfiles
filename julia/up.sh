@@ -1,16 +1,17 @@
 #!/bin/bash -eux
 docker \
-    run \
-    --gpus all \
-    --rm \
-    -it \
-    --env-file=env.txt \
-    --tmpfs=/tmp:rw,exec \
-    --tmpfs=/run:rw,exec \
-    -v /tmp/.X11-unix:/tmp/.X11-unix \
-    -v julia:/root/ \
-    -v `pwd`:/config:ro \
-    eordian/julia \
-    bash
-
-#     --dns=8.8.8.8 \
+run \
+--detach \
+--env-file=env.txt \
+--gpus=all \
+--interactive \
+--name=julia \
+--rm \
+--tmpfs=/run:rw,exec \
+--tmpfs=/tmp:rw,exec \
+--tty \
+--volume=/tmp/.X11-unix:/tmp/.X11-unix \
+--volume=`pwd`:/config:ro \
+--volume=$HOME/.ssh:/root/.ssh \
+--volume=julia:/root/ \
+eordian/julia
