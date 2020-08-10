@@ -15,6 +15,7 @@ Pkg.add.([
     "JuliaDBMeta",
     "MultivariateStats",
     "PackageCompiler",
+    "PkgTemplates",
     "Plotly",
     "RDatasets",
     "ReinforcementLearning",
