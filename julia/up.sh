@@ -6,7 +6,6 @@ run \
 --gpus=all \
 --interactive \
 --name=julia \
---rm \
 --tmpfs=/run:rw,exec \
 --tmpfs=/tmp:rw,exec \
 --tty \
