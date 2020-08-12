@@ -1,3 +1,7 @@
+#!/bin/bash
+
+cat >> /etc/hosts <<EOF
+
 140.82.113.4 github.com
 151.101.25.194 github.global.ssl.fastly.net
 140.82.112.10 codeload.github.com
@@ -17,3 +21,4 @@
 199.232.68.133 avatars7.githubusercontent.com
 199.232.68.133 avatars8.githubusercontent.com
 199.232.68.133 avatars9.githubusercontent.com
+EOF
