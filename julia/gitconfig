@@ -3,3 +3,6 @@
 	name = Your Name
 [credential]
 	helper = cache --timeout=7200
+[core]
+	autocrlf = true
+	safecrlf = true
