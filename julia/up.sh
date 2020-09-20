@@ -10,7 +10,8 @@ run \
 --tmpfs=/tmp:rw,exec \
 --tty \
 --volume=/tmp/.X11-unix:/tmp/.X11-unix \
---volume=`pwd`:/config:ro \
---volume=$HOME/.ssh:/root/.ssh \
 --volume=julia:/root/ \
+--volume=`pwd`:/dockerfile:ro \
+--volume=`pwd`/config:/root/.julia/config \
+--volume=$HOME/.ssh:/root/.ssh \
 eordian/julia
