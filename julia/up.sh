@@ -9,6 +9,7 @@ run \
 --tmpfs=/run:rw,exec \
 --tmpfs=/tmp:rw,exec \
 --tty \
+-v /etc/localtime:/etc/localtime:ro \
 --volume=/tmp/.X11-unix:/tmp/.X11-unix \
 --volume=julia:/root/ \
 --volume=`pwd`:/dockerfile:ro \
