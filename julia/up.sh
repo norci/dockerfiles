@@ -6,6 +6,7 @@ run \
 --gpus=all \
 --interactive \
 --name=julia \
+--privileged \
 --tmpfs=/run:rw,exec \
 --tmpfs=/tmp:rw,exec \
 --tty \
@@ -16,3 +17,5 @@ run \
 --volume=`pwd`/config:/root/.julia/config \
 --volume=$HOME/.ssh:/root/.ssh \
 eordian/julia
+
+xhost +local:root

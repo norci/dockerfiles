@@ -6,7 +6,9 @@ volumes:
 services:
   julia:
     image: eordian/julia
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     env_file:
       - env.txt
     stdin_open: true
