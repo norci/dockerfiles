@@ -1,3 +1,4 @@
+# https://www.git-scm.com/docs/git-config
 [user]
 	email = you@example.com
 	name = Your Name
