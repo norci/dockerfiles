@@ -1,8 +1,9 @@
+# https://www.git-scm.com/book/en/v2/Customizing-Git-Git-Configuration
 [user]
 	email = you@example.com
 	name = Your Name
 [credential]
 	helper = cache --timeout=7200
 [core]
-	autocrlf = true
+	autocrlf = input # true for windows, input for linux
 	safecrlf = true
