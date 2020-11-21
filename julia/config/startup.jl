@@ -6,7 +6,7 @@
 # ENV["JULIA_CUDA_USE_BINARYBUILDER"] = false
 
 # sometimes github is fast enough. the mirrors are not up to date.
-ENV["JULIA_PKG_SERVER"] = "https://mirrors.bfsu.edu.cn/julia"
+# ENV["JULIA_PKG_SERVER"] = "https://mirrors.bfsu.edu.cn/julia" # this will install a very old CSV
 # ENV["JULIA_PKG_SERVER"] = "https://mirrors.sjtug.sjtu.edu.cn/julia"
 
 if ENV["OS"] == "Windows_NT"
