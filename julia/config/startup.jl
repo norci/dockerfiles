@@ -5,9 +5,7 @@
 # false for nvidia docker.
 # ENV["JULIA_CUDA_USE_BINARYBUILDER"] = false
 
-# sometimes github is fast enough. the mirrors are not up to date.
-# ENV["JULIA_PKG_SERVER"] = "https://mirrors.bfsu.edu.cn/julia" # this will install a very old CSV
-# ENV["JULIA_PKG_SERVER"] = "https://mirrors.sjtug.sjtu.edu.cn/julia"
+ENV["JULIA_PKG_SERVER"] = "https://mirrors.sjtug.sjtu.edu.cn/julia"
 
 if ENV["OS"] == "Windows_NT"
     ENV["CONDA_JL_HOME"] = joinpath(ENV["USERPROFILE"], raw".conda\envs\julia")
@@ -17,4 +15,9 @@ try
     using Revise
 catch e
     # @warn(e.msg)
+end
+
+if isinteractive()
+    using Pkg
+    @async Pkg.update()
 end
