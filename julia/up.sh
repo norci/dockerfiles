@@ -2,7 +2,6 @@
 xhost +local:root
 
 ARGS="
--u $(id -u):$(id -g)
 --detach
 --env-file=env.txt
 --gpus=all
@@ -14,7 +13,7 @@ ARGS="
 --tty
 --volume=/etc/localtime:/etc/localtime:ro
 --volume=/tmp/.X11-unix:/tmp/.X11-unix
---volume=`pwd`:/dockerfile:ro
+--volume=`pwd`:/dockerfile:rw
 --volume=`pwd`/config:/root/.julia/config
 --volume=$HOME/.ssh:/root/.ssh:ro
 --volume=julia:/root/.julia

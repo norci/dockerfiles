@@ -11,8 +11,9 @@ RUN set -eux\
 	&& sed -i 's@^@#@' /etc/apt/sources.list.d/nvidia-ml.list \
 	&& sed -i 's@^@#@' /etc/apt/sources.list.d/cuda.list \
 	&& apt-get -qq update\
+	&& apt-get -qq install --no-install-recommends apt-utils
 	&& DEBIAN_FRONTEND=noninteractive apt-get -qq install --no-install-recommends \
-	ca-certificates curl git peco ssh unzip \
+	ca-certificates curl git locales-all peco ssh unzip \
 	libqt5widgets5 \
 	pkg-config libglvnd-dev libgl1-mesa-dev libegl1-mesa-dev libgles2-mesa-dev mesa-utils \
 	&& apt-get -qq clean\
