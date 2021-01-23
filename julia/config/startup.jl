@@ -14,10 +14,4 @@ end
 try
     using Revise
 catch e
-    # @warn(e.msg)
-end
-
-if isinteractive()
-    using Pkg
-    @async Pkg.update()
 end
