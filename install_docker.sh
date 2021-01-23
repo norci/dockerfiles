@@ -12,7 +12,10 @@ distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
 sudo apt-get update
 sudo apt-get install -y nvidia-docker2
 sudo systemctl restart docker
-sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
 
-#### From https://github.com/docker/compose/releases
+# https://github.com/docker/compose/releases
 sudo apt install docker-compose
+
+# See https://docker_practice.gitee.io/install/mirror.html
+sudo systemctl daemon-reload
+sudo systemctl restart docker
