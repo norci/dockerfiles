@@ -1,8 +1,8 @@
 # https://www.git-scm.com/docs/git-config
 # https://www.git-scm.com/book/en/v2/Customizing-Git-Git-Configuration
 [user]
-	email = you@example.com
-	name = Your Name
+	email = norci@users.noreply.github.com
+	name = norci
 [credential]
 	helper = cache --timeout=7200
 [core]
