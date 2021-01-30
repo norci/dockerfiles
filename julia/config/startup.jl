@@ -8,9 +8,9 @@ if haskey(ENV, "CUDNN_VERSION")
     ENV["JULIA_CUDA_USE_BINARYBUILDER"] = false
 end
 
-if haskey(ENV, "OS") && ENV["OS"] == "Windows_NT"
+if Sys.iswindows()
     ENV["CONDA_JL_HOME"] = joinpath(ENV["USERPROFILE"], raw".conda\envs\julia")
-elseif haskey(ENV, "OSTYPE") && ENV["OSTYPE"] == "linux-gnu"
+elseif Sys.islinux()
 end
 
 try
