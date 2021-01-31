@@ -20,7 +20,9 @@ RUN set -eux\
 	libglfw3-dev \
 	&& apt-get -qq clean\
 	&& apt-get -qq autoremove\
-	&& rm -rf /var/lib/apt/lists/*
+	&& rm -rf /var/lib/apt/lists/*\
+	&& sed -i '$a PermitRootLogin yes' /etc/ssh/sshd_config \
+	&& ln -s /usr/local/julia/bin/julia /usr/local/bin/julia
 
 # https://docs.conda.io/projects/conda/en/latest/user-guide/configuration/use-condarc.html
 COPY .condarc /etc/conda/

@@ -4,6 +4,8 @@
 ARGS="
 --detach
 --env-file=env.txt
+--expose=22
+--publish 0.0.0.0:8022:22
 --gpus=all
 --ipc=host
 --interactive
