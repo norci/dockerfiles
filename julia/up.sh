@@ -5,11 +5,11 @@ ARGS="
 --detach
 --env-file=env.txt
 --expose=22
---publish 0.0.0.0:8022:22
 --gpus=all
---ipc=host
 --interactive
+--ipc=host
 --name=julia
+--publish 0.0.0.0:8022:22
 --tmpfs=/run:rw,exec
 --tmpfs=/tmp:rw,exec
 --tty
@@ -20,7 +20,7 @@ ARGS="
 --volume=`pwd`/config:/root/.julia/config
 --volume=code:/code
 --volume=julia:/root/.julia
-eordian/julia
 "
 
-docker run ${ARGS}
+docker run ${ARGS} \
+eordian/julia

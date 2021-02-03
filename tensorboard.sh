@@ -1,13 +1,14 @@
 #!/bin/bash -eux
 ARGS="
--u $(id -u):$(id -g)
--it
---name tensorboard
---expose 6006
--p 6006:6006
 --detach
--v code:/code:ro
-tensorflow/tensorflow:latest
+--expose=6006
+--interactive
+--name=tensorboard
+--publish=6006:6006
+--tty
+--user=$(id -u):$(id -g)
+--volume=code:/code:ro
 "
 
-docker run ${ARGS}
+docker run ${ARGS} \
+tensorflow/tensorflow:latest
