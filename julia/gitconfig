@@ -8,3 +8,6 @@
 [core]
 	autocrlf = input # true for windows, input for linux
 	safecrlf = true
+
+[url "https://ghproxy.com/https://github.com/"]
+	insteadOf = https://github.com/
