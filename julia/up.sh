@@ -1,5 +1,5 @@
 #!/bin/bash -eux
-. setup.sh
+../setup_cuda_mps.sh
 
 ARGS="
 --detach
@@ -13,14 +13,13 @@ ARGS="
 --tmpfs=/run:rw,exec
 --tmpfs=/tmp:rw,exec
 --tty
---volume=$HOME/.emacs.d:/root/.emacs.d
---volume=$HOME/.ssh:/root/.ssh:ro
 --volume=/etc/localtime:/etc/localtime:ro
 --volume=/tmp/.X11-unix:/tmp/.X11-unix
 --volume=`pwd`/config:/root/.julia/config
 --volume=code:/code
 --volume=julia:/root/.julia
 "
-
-docker run ${ARGS} \
-eordian/julia
+docker run ${ARGS} eordian/julia
+docker exec julia service ssh start
+docker exec julia mkdir -p /root/.ssh
+docker cp ~/.ssh/authorized_keys julia:/root/.ssh/
