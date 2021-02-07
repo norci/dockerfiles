@@ -14,8 +14,7 @@ RUN set -eux\
 	&& apt-get -qq install --no-install-recommends apt-utils \
 	&& DEBIAN_FRONTEND=noninteractive \
 	apt-get -qq install --no-install-recommends \
-	ca-certificates curl git locales-all peco ssh unzip \
-	emacs-nox \
+	ca-certificates curl git keychain locales-all peco ssh unzip \
 	libqt5widgets5 \
 	pkg-config libglvnd-dev libgl1-mesa-dev libegl1-mesa-dev libgles2-mesa-dev mesa-utils \
 	libglfw3-dev \
@@ -29,6 +28,7 @@ RUN set -eux\
 ADD https://ghproxy.com/https://github.com/cdr/code-server/releases/download/v3.8.1/code-server_3.8.1_amd64.deb .
 RUN dpkg -i code-server_3.8.1_amd64.deb &&\
 	rm code-server_3.8.1_amd64.deb
+RUN sed -i '$a eval `keychain --eval id_rsa`' /root/.bashrc
 
 # https://docs.conda.io/projects/conda/en/latest/user-guide/configuration/use-condarc.html
 COPY .condarc /etc/conda/
