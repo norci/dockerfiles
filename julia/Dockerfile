@@ -15,6 +15,7 @@ RUN set -eux\
 	&& DEBIAN_FRONTEND=noninteractive \
 	apt-get -qq install --no-install-recommends \
 	ca-certificates curl git locales-all peco ssh unzip \
+	emacs-nox \
 	libqt5widgets5 \
 	pkg-config libglvnd-dev libgl1-mesa-dev libegl1-mesa-dev libgles2-mesa-dev mesa-utils \
 	libglfw3-dev \
@@ -24,10 +25,15 @@ RUN set -eux\
 	&& sed -i '$a PermitRootLogin yes' /etc/ssh/sshd_config \
 	&& ln -s /usr/local/julia/bin/julia /usr/local/bin/julia
 
+# https://github.com/cdr/code-server
+ADD https://ghproxy.com/https://github.com/cdr/code-server/releases/download/v3.8.1/code-server_3.8.1_amd64.deb .
+RUN dpkg -i code-server_3.8.1_amd64.deb &&\
+	rm code-server_3.8.1_amd64.deb
+
 # https://docs.conda.io/projects/conda/en/latest/user-guide/configuration/use-condarc.html
 COPY .condarc /etc/conda/
 COPY pip.conf /etc/
 COPY gitconfig /etc/
-
+COPY cmd.sh /root/
 WORKDIR /root
-CMD ["bash", "-l"]
+CMD /root/cmd.sh

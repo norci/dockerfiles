@@ -9,6 +9,7 @@ ARGS="
 --interactive
 --ipc=host
 --name=julia
+--restart=unless-stopped
 --publish 0.0.0.0:8022:22
 --tmpfs=/run:rw,exec
 --tmpfs=/tmp:rw,exec
@@ -20,6 +21,7 @@ ARGS="
 --volume=julia:/root/.julia
 "
 docker run ${ARGS} eordian/julia
-docker exec julia service ssh start
+
 docker exec julia mkdir -p /root/.ssh
 docker cp ~/.ssh/authorized_keys julia:/root/.ssh/
+docker cp ~/.emacs.d julia:/root/
