@@ -17,7 +17,7 @@ RUN set -eux\
 	&& apt-get -qq install --no-install-recommends apt-utils \
 	&& DEBIAN_FRONTEND=noninteractive \
 	apt-get -qq install --no-install-recommends \
-	ca-certificates curl git keychain locales-all peco ssh unzip \
+	byobu ca-certificates curl emacs-nox git keychain locales-all peco ssh unzip \
 	libqt5widgets5 \
 	pkg-config libglvnd-dev libgl1-mesa-dev libegl1-mesa-dev libgles2-mesa-dev mesa-utils \
 	libglfw3-dev \

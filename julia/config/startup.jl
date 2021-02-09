@@ -4,16 +4,14 @@
 
 ENV["JULIA_PKG_SERVER"] = "https://mirrors.sjtug.sjtu.edu.cn/julia"
 
-if haskey(ENV, "CUDNN_VERSION")
+@static if haskey(ENV, "CUDNN_VERSION")
     ENV["JULIA_CUDA_USE_BINARYBUILDER"] = false
 end
 
-if Sys.iswindows()
-    ENV["CONDA_JL_HOME"] = joinpath(ENV["USERPROFILE"], raw".conda\envs\julia")
-elseif Sys.islinux()
-end
-
-try
-    using Revise
-catch e
+for m in (:Revise, :OhMyREPL)
+    try
+        eval(:(using $(m)))
+    catch e
+        dump(e)
+    end
 end
