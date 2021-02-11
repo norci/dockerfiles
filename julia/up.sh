@@ -1,10 +1,13 @@
 #!/bin/bash -eux
-docker-compose build
+#docker-compose build
 
+THREADS=$(lscpu | awk '/^CPU\(s\):/{print $NF}')
+CORES=$(lscpu | awk '/^Core\(s\) per socket:/{print $NF}')
 ARGS="
 --detach
+--env JULIA_NUM_THREADS=${THREADS}
+--env OPENBLAS_NUM_THREADS=${CORES}
 --env-file=env.txt
---expose=22
 --expose=8080
 --gpus=all
 --interactive
@@ -15,13 +18,13 @@ ARGS="
 --tmpfs=/run:rw,exec
 --tmpfs=/tmp:rw,exec
 --tty
---volume=$HOME/.emacs.d/:/root/.emacs.d/
+--user $(id -u):$(id -g)
 --volume=/etc/localtime:/etc/localtime:ro
 --volume=/tmp/.X11-unix:/tmp/.X11-unix
---volume=`pwd`/config:/root/.julia/config
---volume=code-server_data:/root/.local/share/code-server
+--volume=`pwd`/config:/julia_depot/config
+--volume=code-server_data:/home/coder/.local/share/code-server
 --volume=code:/code
---volume=julia:/root/.julia
+--volume=julia:/julia_depot
 "
 docker run ${ARGS} eordian/julia
-docker cp ~/.ssh/ julia:/root/.ssh/
+docker cp ${HOME}/.ssh julia:/home/coder/.ssh
