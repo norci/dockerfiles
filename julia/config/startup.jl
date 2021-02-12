@@ -8,7 +8,7 @@ ENV["JULIA_PKG_SERVER"] = "https://mirrors.sjtug.sjtu.edu.cn/julia"
     ENV["JULIA_CUDA_USE_BINARYBUILDER"] = false
 end
 
-for m in (:Revise, :OhMyREPL)
+for m in (:Revise, :OhMyREPL, :Debugger)
     try
         eval(:(using $(m)))
     catch e
