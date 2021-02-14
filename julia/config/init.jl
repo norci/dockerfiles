@@ -4,6 +4,7 @@ Pkg.add.(
         "BenchmarkTools"
         "Conda"
         "Debugger"
+        "InteractiveCodeSearch"
         "JuliaFormatter"
         "PackageCompiler"
         "PkgTemplates"

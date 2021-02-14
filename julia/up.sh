@@ -1,5 +1,6 @@
 #!/bin/bash -eux
 #docker-compose build
+# --volume=/tmp/.X11-unix:/tmp/.X11-unix
 
 THREADS=$(lscpu | awk '/^CPU\(s\):/{print $NF}')
 CORES=$(lscpu | awk '/^Core\(s\) per socket:/{print $NF}')
@@ -20,7 +21,6 @@ ARGS="
 --tty
 --user $(id -u):$(id -g)
 --volume=/etc/localtime:/etc/localtime:ro
---volume=/tmp/.X11-unix:/tmp/.X11-unix
 --volume=`pwd`/config:/julia_depot/config
 --volume=code-server_data:/home/coder/.local/share/code-server
 --volume=code:/code
