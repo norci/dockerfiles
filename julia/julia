@@ -1,0 +1,2 @@
+#!/bin/bash
+docker exec -it julia tmux -u new-session -A -s a julia

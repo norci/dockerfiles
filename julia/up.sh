@@ -9,22 +9,20 @@ ARGS="
 --env JULIA_NUM_THREADS=${THREADS}
 --env OPENBLAS_NUM_THREADS=${CORES}
 --env-file=env.txt
---expose=8080
 --gpus=all
 --interactive
 --ipc=host
 --name=julia
---publish 127.0.0.1:8080:8080
+--network=host
 --restart=unless-stopped
 --tmpfs=/run:rw,exec
 --tmpfs=/tmp:rw,exec
 --tty
---user $(id -u):$(id -g)
 --volume=/etc/localtime:/etc/localtime:ro
 --volume=`pwd`/config:/julia_depot/config
---volume=code-server_data:/home/coder/.local/share/code-server
 --volume=code:/code
 --volume=julia:/julia_depot
 "
-docker run ${ARGS} eordian/julia
-docker cp ${HOME}/.ssh julia:/home/coder/.ssh
+docker run ${ARGS} eordian/julia bash
+docker cp ${HOME}/.ssh julia:/root/.ssh
+docker exec julia chown -R 0:0 /root/.ssh
