@@ -12,4 +12,3 @@ Pkg.add.(
         "Revise"
     ],
 )
-Pkg.precompile()
