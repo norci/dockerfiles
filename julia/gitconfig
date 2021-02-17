@@ -8,7 +8,7 @@
 	helper = cache --timeout=7200
 
 [core]
-	autocrlf = input # true for windows, input for linux
+	autocrlf = true # true for windows, input for linux
 	safecrlf = true
 
 [url "https://hub.fastgit.org/"]
