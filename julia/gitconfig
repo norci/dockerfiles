@@ -9,7 +9,7 @@
 
 [core]
 	autocrlf = true # true for windows, input for linux
-	safecrlf = true
+	safecrlf = warn
 
 [url "https://hub.fastgit.org/"]
 	insteadOf = https://github.com/
